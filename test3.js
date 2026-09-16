@@ -1,0 +1,12 @@
+const fs = require('fs');
+const html = fs.readFileSync('index.html', 'utf8');
+const startTag = '<script type="__bundler/template">';
+const startIdx = html.indexOf(startTag) + startTag.length;
+const endIdx = html.indexOf('</script>', startIdx);
+const content = html.substring(startIdx, endIdx);
+const firstQuote = content.indexOf('"');
+const lastQuote = content.lastIndexOf('"');
+const str = content.substring(firstQuote, lastQuote+1);
+console.log('Length of str:', str.length);
+console.log(JSON.stringify(str.substring(0, 100)));
+for(let i=70; i<85; i++) console.log(i, str.charCodeAt(i), str[i]);
